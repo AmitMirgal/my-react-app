@@ -12,10 +12,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "chromatic": "npx chromatic --project-token=23eaea5d1d2a"
@@ -62,7 +61,9 @@
     "babel-plugin-named-exports-order": "^0.0.2",
     "chromatic": "^6.11.4",
     "prop-types": "^15.8.1",
-    "webpack": "^5.74.0"
+    "webpack": "^5.74.0",
+    "@vitejs/plugin-react": "^2.2.0",
+    "vite": "^3.2.2"
   },
   "readme": "ERROR: No README data found!",
   "_id": "my-react-app@0.1.0"
