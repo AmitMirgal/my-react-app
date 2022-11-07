@@ -1,63 +1,44 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import Root, {
 	loader as rootLoader,
 	action as rootAction,
 } from "./routes/root";
-import {
+import Contact, {
 	loader as contactLoader,
 	action as contactAction,
 } from "./routes/contact";
-import { action as editAction } from "./routes/edit";
+import EditContact, { action as editAction } from "./routes/edit";
 import { action as destroyAction } from "./routes/destroy";
 import Index from "./routes/index";
+import ErrorPage from "./error-page";
 
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-const LazyErrorPage = React.lazy(() => import("./error-page"));
-const LazyEditContact = React.lazy(() => import("./routes/edit"));
-const LazyContact = React.lazy(() => import("./routes/contact"));
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <Root />,
-		errorElement: (
-			<React.Suspense fallback={<>fallback component</>}>
-				<LazyErrorPage />
-			</React.Suspense>
-		),
+		errorElement: <ErrorPage />,
 		loader: rootLoader,
 		action: rootAction,
 		children: [
 			{
-				errorElement: (
-					<React.Suspense fallback={<>fallback component</>}>
-						<LazyErrorPage />
-					</React.Suspense>
-				),
+				errorElement: <ErrorPage />,
 				children: [
 					{ index: true, element: <Index /> },
 					{
 						path: "contacts/:contactId",
-						element: (
-							<React.Suspense fallback={<>fallback component</>}>
-								<LazyContact />
-							</React.Suspense>
-						),
+						element: <Contact />,
 						loader: contactLoader,
 						action: contactAction,
 					},
 					{
 						path: "contacts/:contactId/edit",
-						element: (
-							<React.Suspense fallback={<>fallback component</>}>
-								<LazyEditContact />
-							</React.Suspense>
-						),
+						element: <EditContact />,
 						loader: contactLoader,
 						action: editAction,
 					},
